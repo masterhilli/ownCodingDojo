@@ -61,4 +61,6 @@ $RECYCLE.BIN/
 # Eclipse stuff
 .metadata
 .recommenders
+/.settings/
 RemoteSystemsTempFiles
+/.classpath/
