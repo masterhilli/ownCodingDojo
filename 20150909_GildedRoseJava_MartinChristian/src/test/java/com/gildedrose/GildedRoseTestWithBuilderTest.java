@@ -12,66 +12,143 @@ import org.junit.Test;
 import com.gildedrose.GildedRose;
 import com.gildedrose.Item;
 
-public class GildedRoseTestWithBuilderTest {
+public class GildedRoseTestWithBuilderTest extends GildedRoseBoundaries {
 	Builder builder = null;
-	
+
 	@Before
 	public void setUp() {
 		builder = null;
 	}
-	
+
+	// testcases for changes in sell in day
 	@Test
-	public void updateQualityReducesQualityBy1WithinSellInDate () {
-		givenAnOrdinaryItem().andWithQuality(10).inStock();
+	public void updateQualityOfOrdinaryItemReducesSellInDayBy1() {
+		givenAnOrdinaryItem().withSellIn(EXAMPLE_SELLINDAY).inStock();
 		whenUpdateQuality();
-		thenTheQualityIs(9);
+		thenTheSellInDayShouldBe(EXAMPLE_SELLINDAY - 1);
 	}
 
 	@Test
-	public void updateQualityReducesSellInDateBy1() {
-		givenAnOrdinaryItem().andWithSellIn(34).inStock();
+	public void updateQualityOfOrdinaryItemOnSellInDayReducesSellInBy1() {
+		givenAnOrdinaryItem().withSellIn(0).inStock();
 		whenUpdateQuality();
-		thenTheSellInIs(33);
-	}	
+		thenTheSellInDayShouldBe(-1);
+	}
 
+	@Test
+	public void updateQualityOfOrdinaryItemPastSellInDaysReducesSellInDayBy1() {
+		givenAnAgedBrie().withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheSellInDayShouldBe(-2);
+	}
+	
+	@Test
+	public void updateQualityOfSulfurasItemWithSellInDaysKeepsSellInDays() {
+		givenASulfurasItem().withSellIn(EXAMPLE_SELLINDAY).inStock();
+		whenUpdateQuality();
+		thenTheSellInDayShouldBe(EXAMPLE_SELLINDAY);
+	}
+	
+	@Test
+	public void updateQualityOfSulfurasItemOnSellInDayKeepsSellInDays() {
+		givenASulfurasItem().withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheSellInDayShouldBe(0);
+	}
+	
+	@Test
+	public void updateQualityOfSulfurasItemPastSellInDaysKeepsSellInDays() {
+		givenASulfurasItem().withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheSellInDayShouldBe(-1);
+	}
+	
+	@Test
+	public void updateQualityOfBackstagePassWithSellInDaysReducesSellInDayBy1() {
+		givenAnAgedBrie().withSellIn(EXAMPLE_SELLINDAY).inStock();
+		whenUpdateQuality();
+		thenTheSellInDayShouldBe(EXAMPLE_SELLINDAY-1);
+	}
+	
+	@Test
+	public void updateQualityOfBackstagePassOnSellInDayReducesSellInDayBy1() {
+		givenAnAgedBrie().withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheSellInDayShouldBe(-1);
+	}
+	
+	@Test
+	public void updateQualityOfBackstagePassPastSellInDaysReducesSellInDayBy1() {
+		givenAnAgedBrie().withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheSellInDayShouldBe(-2);
+	}
+	
+	
+	// test cases for checkin the quality
+
+	@Test
+	public void updateQualityReducesQualityBy1WithinSellInDate() {
+		givenAnOrdinaryItem().withQuality(10).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(9);
+	}
+
+	
+	
+	
+// helper methods
 	private Builder givenAnOrdinaryItem() {
-		if (builder == null) {
-			builder = new OrdinaryItemBuilder();
-		}
+		builder = new OrdinaryItemBuilder();
+		return builder;
+	}
+
+	private Builder givenAnAgedBrie() {
+		builder = new AgedBrieBuilder();
 		return builder;
 	}
 	
+	private Builder givenASulfurasItem() {
+		builder = new SulfurasBuilder();
+		return builder;
+	}
+	
+	private Builder givenBackstagePass() {
+		builder = new BackstagePassBuilder();
+		return builder;
+	}
+
 	private void whenUpdateQuality() {
 		GildedRose app = new GildedRose(builder.getItems());
 		app.updateQuality();
 		builder.setActual(app.items);
 	}
-	
-	private void thenTheQualityIs(int expectedQuality) {
+
+	private void thenTheQualityShouldBe(int expectedQuality) {
 		assertEquals(expectedQuality, builder.getActual(0).quality);
 	}
-	
-	private void thenTheSellInIs(int expectedSellIn) {
+
+	private void thenTheSellInDayShouldBe(int expectedSellIn) {
 		assertEquals(expectedSellIn, builder.getActual(0).sellIn);
-		
+
 	}
 }
 
 class Builder extends GildedRoseBoundaries {
 	Item actualItem = null;
-	List<Item> stock = new ArrayList<> ();
-	List<Item> updateStock = new ArrayList<> ();
-	
-	protected Builder () {
+	List<Item> stock = new ArrayList<>();
+	List<Item> updateStock = new ArrayList<>();
+
+	protected Builder() {
 		// overridden constructor, so that Builder can not be created
 	}
-	
-	public Builder andWithQuality(int quality) {
+
+	public Builder withQuality(int quality) {
 		actualItem.quality = quality;
 		return this;
 	}
-	
-	public Builder andWithSellIn(int sellIn) {
+
+	public Builder withSellIn(int sellIn) {
 		actualItem.sellIn = sellIn;
 		return this;
 	}
@@ -82,23 +159,23 @@ class Builder extends GildedRoseBoundaries {
 
 	public void setActual(Item[] items) {
 		Stream.of(items).forEach(updateStock::add);
-		
+
 	}
 
 	public void inStock() {
 		stock.add(actualItem);
 		actualItem = null;
 	}
-	
+
 	public Item[] getItems() {
 		return stock.stream().toArray(Item[]::new);
-	}	
+	}
 }
 
 class OrdinaryItemBuilder extends Builder {
 	public OrdinaryItemBuilder() {
 		if (actualItem == null) {
-			actualItem = new Item(NAME_ORDINARY_ITEM, EXAMPLE_SELLINDAY , EXAMPLE_QUALITY);
+			actualItem = new Item(NAME_ORDINARY_ITEM, EXAMPLE_SELLINDAY, EXAMPLE_QUALITY);
 		}
 	}
 }
@@ -106,7 +183,7 @@ class OrdinaryItemBuilder extends Builder {
 class AgedBrieBuilder extends Builder {
 	public AgedBrieBuilder() {
 		if (actualItem == null) {
-			actualItem = new Item(NAME_AGED_BRIE, EXAMPLE_SELLINDAY , EXAMPLE_QUALITY);
+			actualItem = new Item(NAME_AGED_BRIE, EXAMPLE_SELLINDAY, EXAMPLE_QUALITY);
 		}
 	}
 }
@@ -114,7 +191,7 @@ class AgedBrieBuilder extends Builder {
 class SulfurasBuilder extends Builder {
 	public SulfurasBuilder() {
 		if (actualItem == null) {
-			actualItem = new Item(NAME_SULFURAS, EXAMPLE_SELLINDAY , EXAMPLE_QUALITY);
+			actualItem = new Item(NAME_SULFURAS, EXAMPLE_SELLINDAY, EXAMPLE_QUALITY);
 		}
 	}
 }
@@ -122,7 +199,7 @@ class SulfurasBuilder extends Builder {
 class BackstagePassBuilder extends Builder {
 	public BackstagePassBuilder() {
 		if (actualItem == null) {
-			actualItem = new Item(NAME_BACKSTAGE_PASS, EXAMPLE_SELLINDAY , EXAMPLE_QUALITY);
+			actualItem = new Item(NAME_BACKSTAGE_PASS, EXAMPLE_SELLINDAY, EXAMPLE_QUALITY);
 		}
 	}
 }
@@ -130,7 +207,7 @@ class BackstagePassBuilder extends Builder {
 class ConjuredBuilder extends Builder {
 	public ConjuredBuilder() {
 		if (actualItem == null) {
-			actualItem = new Item(NAME_CONJURED_ITEM, EXAMPLE_SELLINDAY , EXAMPLE_QUALITY);
+			actualItem = new Item(NAME_CONJURED_ITEM, EXAMPLE_SELLINDAY, EXAMPLE_QUALITY);
 		}
 	}
 }

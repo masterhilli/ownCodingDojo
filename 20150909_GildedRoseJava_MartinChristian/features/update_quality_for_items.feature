@@ -11,9 +11,9 @@ Feature: Update the quality for items
       | 'Ordinary item'                             | 1         | 22      | 0                 |
       | 'Ordinary item'                             | 0         | 22      | -1                |
       | 'Aged Brie'                                 | -1        | 22      | -2                |
-      | 'Sulfuras, Hand of Ragnaros'                | 1         | 22      | 1                |
+      | 'Sulfuras, Hand of Ragnaros'                | 1         | 22      | 1                 |
       | 'Sulfuras, Hand of Ragnaros'                | -1        | 22      | -1                |
-      | 'Sulfuras, Hand of Ragnaros'                | 0         | 22      | 0                |
+      | 'Sulfuras, Hand of Ragnaros'                | 0         | 22      | 0                 |
       | 'Backstage passes to a TAFKAL80ETC concert' | 1         | 49      | 0                 |
       | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 50      | -1                |
       | 'Backstage passes to a TAFKAL80ETC concert' | -1        | 49      | -2                |
