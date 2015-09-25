@@ -21,7 +21,7 @@ public class GildedRoseCucumberTestSteps extends GildedRoseWithDescribtiveUnitTe
 	
 	@Given ("an item with the name '(.+)', with days to sell in of -(\\d+), with the quality of (\\d+)")
 	public void givenAnItemWithSellInAndQualityMinusSellIn(final String name, final  int sellInDays, final int quality) {
-		addItem(name, sellInDays, quality);
+		addItem(name, -1*sellInDays, quality);
 	}
 
 	@When ("the quality is updated")
@@ -41,7 +41,7 @@ public class GildedRoseCucumberTestSteps extends GildedRoseWithDescribtiveUnitTe
 	
 	@Then ("the day to sell the item in should be -(\\d+)")
 	public void thenSellInShouldBeMinus(final int sellInDays) {
-		super.thenSellInShouldBe(sellInDays);
+		super.thenSellInShouldBe(-1*sellInDays);
 	}
 	
 }

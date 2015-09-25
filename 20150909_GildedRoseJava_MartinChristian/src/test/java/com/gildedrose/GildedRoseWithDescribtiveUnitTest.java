@@ -63,14 +63,14 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 		givenAnItemOfSellIn(1);
 		whenQualityIsUpdated();
 		thenSellInShouldBe(0);
-	}
+	} //
 
 	@Test
 	public void updateQualityReducesSellInValueForOrdinaryItemBy1AfterLastSellInDay() {
 		givenAnItemOfSellIn(0);
 		whenQualityIsUpdated();
 		thenSellInShouldBe(PAST_SELLIN_DAYS);
-	}
+	} // 
 
 	@Test
 	public void updateQualityConsidersAllItemsInStore() {
@@ -89,59 +89,45 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 		givenAnItemOfSellInAndQuality(0, 5);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(3);
-	}
+	} // 
 
 	@Test
 	public void ordinaryItemPastSellInDayWithLittleQualityDegradesToNoQuality() {
 		givenAnItemOfSellInAndQuality(PAST_SELLIN_DAYS, 1);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(MINIMUM_QUALITY);
-	}
+	} //
 
 	/*
 	 * "Aged Brie" actually increases in Quality the older it gets
 	 */
 	@Test
-	public void updateQualityForAgedBrieWithNoSellInDaysIncreasesQualityTwiceAsFast() {
-		givenAnAgedBrieOfSellInDaysAndQuality(0, 5);
-		whenQualityIsUpdated();
-		thenTheQualityShouldBe(7);
-	}
-
-	@Test
-	public void updateQualityForAgedBrieWithNoSellInDaysAndNoQualityIncreasesQualityTwiceAsFast() {
-		givenAnAgedBrieOfSellInDaysAndQuality(0, MINIMUM_QUALITY);
-		whenQualityIsUpdated();
-		thenTheQualityShouldBe(2);
-	}
-
-	@Test
-	public void updateQualityForAgedBrieWithSellInDaysIncreasesQualityBy1() {
-		givenAnAgedBrieOfSellInDaysAndQuality(5, 5);
-		whenQualityIsUpdated();
-		thenTheQualityShouldBe(6);
-	}
-
-	@Test
-	public void updateQualityForAgedBrieWithSellInDaysAndNoQualityIncreasesQualityBy1() {
-		givenAnAgedBrieOfSellInDaysAndQuality(5, MINIMUM_QUALITY);
-		whenQualityIsUpdated();
-		thenTheQualityShouldBe(1);
-	}
-
-	@Test
 	public void updateQualityForAgedBriePastSellInDaysIncreasesQualityTwiceAsFast() {
 		givenAnAgedBrieOfSellInDaysAndQuality(0, 5);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(7);
-	}
+	} //
 
 	@Test
 	public void updateQualityForAgedBriePastSellInDaysAndNoQualityIncreasesQualityTwiceAsFast() {
 		givenAnAgedBrieOfSellInDaysAndQuality(0, MINIMUM_QUALITY);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(2);
-	}
+	} //
+
+	@Test
+	public void updateQualityForAgedBrieWithSellInDaysIncreasesQualityBy1() {
+		givenAnAgedBrieOfSellInDaysAndQuality(5, 5);
+		whenQualityIsUpdated();
+		thenTheQualityShouldBe(6);
+	} //
+
+	@Test
+	public void updateQualityForAgedBrieWithSellInDaysAndNoQualityIncreasesQualityBy1() {
+		givenAnAgedBrieOfSellInDaysAndQuality(5, MINIMUM_QUALITY);
+		whenQualityIsUpdated();
+		thenTheQualityShouldBe(1);
+	} // 
 
 	/*
 	 * The Quality of an item is never more than 50
@@ -178,21 +164,21 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 		givenASulfurasItemWithSellInDays(EXAMPLE_SELLINDAY);
 		whenQualityIsUpdated();
 		thenSellInShouldBe(EXAMPLE_SELLINDAY);
-	}
+	} //
 
 	@Test
 	public void updateQualityforSulfurasWithNoSellInDaysLeftReducesSellInDaysBy1() {
 		givenASulfurasItemWithSellInDays(0);
 		whenQualityIsUpdated();
 		thenSellInShouldBe(0);
-	}
+	} //
 
 	@Test
 	public void updateQualityforSulfurasWithSellInDaysPastReducesSellInDaysBy1() {
 		givenASulfurasItemWithSellInDays(-5);
 		whenQualityIsUpdated();
 		thenSellInShouldBe(-5);
-	}
+	} //
 
 	@Test
 	public void updateQualityforSulfurasWithMaxQualityKeepsMaxQuality() {
