@@ -1,25 +1,20 @@
 Feature: Update the quality for items
   The quality of an item is updated after every day. There are special items, where the quality is updated differently
 
-  Scenario: Update the quality of an ordinary item
-    Given an item with the name 'Ordinary item', with days to sell in of 22, with the quality of 2
+ Scenario: Update the day to sell the item in
+    Given an item with the name 'Ordinary Item', with days to sell in of 22, with the quality of 22
     When the quality is updated
-    Then the quality should be 1
+    Then the day to sell the item in should be 21
 
-    
-    # afterwards we make a scenario outline
- #    If there are many examples, this becomes tedious. We can simplify it with a Scenario Outline:
- #
- #Scenario Outline: feeding a suckler cow
- #  Given the cow weighs <weight> kg
- #  When we calculate the feeding requirements
- #  Then the energy should be <energy> MJ
- #  And the protein should be <protein> kg
- #
- #  Examples:
-     #| weight | energy | protein |
-     #|    450 |  26500 |     215 |
-     #|    500 |  29500 |     245 |
-     #|    575 |  31500 |     255 |
-     #|    600 |  37000 |     305 |
-   
+  Scenario Outline: Update the quality of an ordinary item
+    Given an item with the name <name>, with days to sell in of <sellinday>, with the quality of <quality>
+    When the quality is updated
+    Then the quality should be <expectedQuality>
+
+    Examples: 
+      | name            | sellinday | quality | expectedQuality |
+      | 'Ordinary item' | 22        | 2       | 1               |
+      | 'Ordinary item' | 22        | 0       | 0               |
+      | 'Ordinary item' | -1        | 0       | 0               |
+      | 'Ordinary item' | 1         | 22      | 21              |
+      | 'Ordinary item' | 1         | 22      | 21              |

@@ -35,14 +35,14 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 		givenAnItemOfQuality(2);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(1);
-	}
+	} // as cucumber
 
 	@Test
 	public void itemQualityStaysAtNoQualityIfWithInSellInDays() {
 		givenAnItemOfQuality(MINIMUM_QUALITY);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(MINIMUM_QUALITY);
-	}
+	} //
 
 	@Test
 	public void ordinaryItemPastSellInDayWithoutQualityStaysWithoutQuality() {
@@ -56,7 +56,7 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 		givenAnItemOfSellInAndQuality(1, 5);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(4);
-	}
+	} //
 
 	@Test
 	public void updateQualityReducesSellInValueForOrdinaryItemBy1() {
