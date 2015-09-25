@@ -27,11 +27,11 @@ Feature: Update the quality for items
       | name                                        | sellinday | quality | expectedQuality |
       | 'Ordinary item'                             | 22        | 2       | 1               |
       | 'Ordinary item'                             | 22        | 0       | 0               |
-      | 'Ordinary item'                             | -1        | 0       | 0               |
-      | 'Ordinary item'                             | 1         | 22      | 21              |
       | 'Ordinary item'                             | 1         | 22      | 21              |
       | 'Ordinary item'                             | 0         | 22      | 20              |
+      | 'Ordinary item'                             | -1        | 0       | 0               |
       | 'Ordinary item'                             | -1        | 1       | 0               |
+      | 'Ordinary item'                             | -1         | 22      | 20              |
       | 'Aged Brie'                                 | 0         | 22      | 24              |
       | 'Aged Brie'                                 | 0         | 0       | 2               |
       | 'Aged Brie'                                 | 22        | 22      | 23              |

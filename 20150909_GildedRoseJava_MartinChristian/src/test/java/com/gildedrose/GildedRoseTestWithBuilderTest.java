@@ -88,10 +88,52 @@ public class GildedRoseTestWithBuilderTest extends GildedRoseBoundaries {
 	// test cases for checkin the quality
 
 	@Test
-	public void updateQualityReducesQualityBy1WithinSellInDate() {
-		givenAnOrdinaryItem().withQuality(10).inStock();
+	public void updateQualityOfOrdinaryItemWithQualityWithInSellInDaysReducesQualityBy1() {
+		givenAnOrdinaryItem().withQuality(EXAMPLE_QUALITY).inStock();
 		whenUpdateQuality();
-		thenTheQualityShouldBe(9);
+		thenTheQualityShouldBe(EXAMPLE_QUALITY-1);
+	}
+	
+	@Test
+	public void updateQualityOfOrdinaryItemWithNoQualityWithInSellInDaysStillHasNoQuality() {
+		givenAnOrdinaryItem().withQuality(MINIMUM_QUALITY).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MINIMUM_QUALITY);
+	}
+	
+	@Test
+	public void updateQualityOfOrdinaryItemWithQualityWithBeforeSellInDayReducesQualityBy1() {
+		givenAnOrdinaryItem().withQuality(EXAMPLE_QUALITY).withSellIn(1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY-1);
+	}
+	
+	@Test
+	public void updateQualityOfOrdinaryItemWithQualityOnSellInDayReducesQualityBy2() {
+		givenAnOrdinaryItem().withQuality(EXAMPLE_QUALITY).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY-2);
+	}
+	
+	@Test
+	public void updateQualityOfOrdinaryItemWithQualityPastSellInDayReducesQualityBy2() {
+		givenAnOrdinaryItem().withQuality(EXAMPLE_QUALITY).withSellIn(-2).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY-2);
+	}
+	
+	@Test
+	public void updateQualityOfOrdinaryItemWithLowestQualityPastSellInDayReducesQualityToMimumQuality() {
+		givenAnOrdinaryItem().withQuality(1).withSellIn(-2).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MINIMUM_QUALITY);
+	}
+	
+	@Test
+	public void updateQualityOfOrdinaryItemWithNoQualityPastSellInDayStillHasNoQuality() {
+		givenAnOrdinaryItem().withQuality(MINIMUM_QUALITY).withSellIn(-2).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MINIMUM_QUALITY);
 	}
 
 	
