@@ -1,3 +1,0 @@
-1. Create test cases with builder
-2. Create the same test cases with cucumber
-3. Commit it to session git repository
