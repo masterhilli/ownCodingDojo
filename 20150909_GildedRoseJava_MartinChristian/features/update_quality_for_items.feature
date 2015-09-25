@@ -34,12 +34,12 @@ Feature: Update the quality for items
       | 'Ordinary item'                             | -1         | 22      | 20              |
       | 'Aged Brie'                                 | 0         | 22      | 24              |
       | 'Aged Brie'                                 | 0         | 0       | 2               |
+      | 'Aged Brie'                                 | 0         | 50      | 50              |
+      | 'Aged Brie'                                 | 0         | 49      | 50              |
       | 'Aged Brie'                                 | 22        | 22      | 23              |
       | 'Aged Brie'                                 | 22        | 0       | 1               |
       | 'Aged Brie'                                 | 22        | 50      | 50              |
       | 'Aged Brie'                                 | 22        | 49      | 50              |
-      | 'Aged Brie'                                 | 0         | 50      | 50              |
-      | 'Aged Brie'                                 | 0         | 49      | 50              |
       | 'Aged Brie'                                 | -1        | 50      | 50              |
       | 'Aged Brie'                                 | -1        | 49      | 50              |
       | 'Sulfuras, Hand of Ragnaros'                | 1         | 50      | 50              |

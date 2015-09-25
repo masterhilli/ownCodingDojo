@@ -1,3 +1,3 @@
-1. Create test cases with builder
-2. Create the same test cases with cucumber
-3. Commit it to session git repository
+1. Create test cases with builder  -- In Progress
+2. Create the same test cases with cucumber -- DONE cucumber scenario outlines used
+3. Create a parameterized Unit test with the same test cases as the Descriptive UnitTest 

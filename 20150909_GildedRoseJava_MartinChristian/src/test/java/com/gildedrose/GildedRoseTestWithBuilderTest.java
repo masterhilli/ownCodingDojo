@@ -135,8 +135,79 @@ public class GildedRoseTestWithBuilderTest extends GildedRoseBoundaries {
 		whenUpdateQuality();
 		thenTheQualityShouldBe(MINIMUM_QUALITY);
 	}
-
 	
+	
+
+//    | 'Aged Brie'                                 | 0         | 22      | 24              |
+	@Test
+	public void updateQualityOfAgedBrieWithQualityOnSellInDayStillIncreasesQualityBy2() {
+		givenAnAgedBrie().withQuality(EXAMPLE_QUALITY).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY+2);
+	}
+//    | 'Aged Brie'                                 | 0         | 0       | 2               |
+	@Test
+	public void updateQualityOfAgedBrieNoQualityOnSellInDayStillIncreasesQualityBy2() {
+		givenAnAgedBrie().withQuality(0).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(2);
+	}
+//    | 'Aged Brie'                                 | 0         | 50      | 50              |
+	@Test
+	public void updateQualityOfAgedBrieWithMaximumQualityOnSellInDayStillHasMaximumQuality() {
+		givenAnAgedBrie().withQuality(MAXIMUM_QUALITY).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Aged Brie'                                 | 0         | 49      | 50              |
+	@Test
+	public void updateQualityOfAgedBrieWithAlmostMaximumQualityOnSellInDayIncreasesToMaximumQuality() {
+		givenAnAgedBrie().withQuality(MAXIMUM_QUALITY-1).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Aged Brie'                                 | 22        | 22      | 23              |
+	@Test
+	public void updateQualityOfAgedBrieWithQualityWithSellInDaysIncreasesQualityBy1() {
+		givenAnAgedBrie().withQuality(EXAMPLE_QUALITY).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY+1);
+	}
+//    | 'Aged Brie'                                 | 22        | 0       | 1               |
+	@Test
+	public void updateQualityOfAgedBrieWithNoQualityWithSellInDaysIncreasesQualityBy1() {
+		givenAnAgedBrie().withQuality(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(1);
+	}
+//    | 'Aged Brie'                                 | 22        | 50      | 50              |
+	@Test
+	public void updateQualityOfAgedBrieWithMaximumQualityWithSellInDaysStillHasMaximumQuality() {
+		givenAnAgedBrie().withQuality(MAXIMUM_QUALITY).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Aged Brie'                                 | 22        | 49      | 50              |
+	@Test
+	public void updateQualityOfAgedBrieWithAlmostMaximumQualityWithSellInDaysIncreasesToMaximumQuality() {
+		givenAnAgedBrie().withQuality(MAXIMUM_QUALITY-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Aged Brie'                                 | -1        | 50      | 50              |
+	@Test
+	public void updateQualityOfAgedBrieWithMaximumQualityPastSellInDayStillHasMaximumQuality() {
+		givenAnAgedBrie().withQuality(MAXIMUM_QUALITY).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Aged Brie'                                 | -1        | 49      | 50              |
+	@Test
+	public void updateQualityOfAgedBrieWithAlmostMaximumQualityPastSellInDayIncreasesToMaximumQuality() {
+		givenAnAgedBrie().withQuality(MAXIMUM_QUALITY-1).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
 	
 	
 // helper methods
