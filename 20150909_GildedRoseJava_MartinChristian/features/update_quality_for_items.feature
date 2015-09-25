@@ -66,7 +66,6 @@ Feature: Update the quality for items
       | 'Backstage passes to a TAFKAL80ETC concert' | 5         | 47      | 50              |
       | 'Backstage passes to a TAFKAL80ETC concert' | 5         | 50      | 50              |
       | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 0       | 0               |
-      | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 48      | 0               |
       | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 49      | 0               |
       | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 50      | 0               |
       | 'Backstage passes to a TAFKAL80ETC concert' | -1        | 0       | 0               |

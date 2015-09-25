@@ -273,6 +273,152 @@ public class GildedRoseTestWithBuilderTest extends GildedRoseBoundaries {
 		thenTheQualityShouldBe(0);
 	}
 	
+
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 11        | 0       | 1               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 11        | 49      | 50              |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 11        | 50      | 50              |
+	@Test
+	public void updateQualityOfBackstagePassWithNoQualityWithSellInDayBefore10IncreasesBy1() {
+		givenABackstagePass().withQuality(0).withSellIn(11).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(1);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithAlmostMaximumQualityWithSellInDayBefore10IncreasesToMaximumQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-1).withSellIn(11).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithMaximumQualityWithSellInDayBefore10StillHasMaximum() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY).withSellIn(11).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 10        | 0       | 2               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 10        | 49      | 50              |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 10        | 50      | 50              |
+	@Test
+	public void updateQualityOfBackstagePassWithNoQualityWith10daysBeforeSellInDayIncreasesBy2() {
+		givenABackstagePass().withQuality(0).withSellIn(10).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(2);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithAlmostMaximumQualityWith10daysBeforeSellInDayIncreasesToMaximumQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-1).withSellIn(10).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithMaximumQualityWith10daysBeforeSellInDayStillHasMaximum() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY).withSellIn(10).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 6         | 0       | 2               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 6         | 49      | 50              |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 6         | 50      | 50              |
+	@Test
+	public void updateQualityOfBackstagePassWithNoQualityWith6daysBeforeSellInDayIncreasesBy2() {
+		givenABackstagePass().withQuality(0).withSellIn(6).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(2);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithAlmostMaximumQualityWith6daysBeforeSellInDayIncreasesToMaximumQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-1).withSellIn(6).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithMaximumQualityWith6daysBeforeSellInDayStillHasMaximum() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY).withSellIn(6).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 5         | 0       | 3               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 5         | 49      | 50              |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 5         | 48      | 50              |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 5         | 47      | 50              |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 5         | 50      | 50              |
+	@Test
+	public void updateQualityOfBackstagePassWithNoQualityWith5daysBeforeSellInDayIncreasesBy3() {
+		givenABackstagePass().withQuality(0).withSellIn(5).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(3);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithAlmostMaximumQualityWith5daysBeforeSellInDayIncreasesToMaximumQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-1).withSellIn(5).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	
+	@Test
+	public void updateQualityOfBackstagePassWith2beyondMaximumQualityWith5daysBeforeSellInDayIncreasesToMaximumQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-2).withSellIn(5).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	
+	@Test
+	public void updateQualityOfBackstagePassWith3beyondMaximumQualityWith5daysBeforeSellInDayIncreasesToMaximumQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-3).withSellIn(5).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	
+	@Test
+	public void updateQualityOfBackstagePassWithMaximumQualityWith5daysBeforeSellInDayStillHasMaximum() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY).withSellIn(5).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 0       | 0               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 49      | 0               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | 0         | 50      | 0               |
+	@Test
+	public void updateQualityOfBackstagePassWithNoQualityOnSellInDayStillHasNoQuality() {
+		givenABackstagePass().withQuality(0).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithAlmostMaximumQualityOnSellInDayDropsToNoQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-1).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithMaximumQualityOnSellInDayDropsToNoQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+//    | 'Backstage passes to a TAFKAL80ETC concert' | -1        | 0       | 0               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | -1        | 49      | 0               |
+//    | 'Backstage passes to a TAFKAL80ETC concert' | -1        | 50      | 0               |
+	@Test
+	public void updateQualityOfBackstagePassWithNoQualityPastSellInDayStillHasNoQuality() {
+		givenABackstagePass().withQuality(0).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithAlmostMaximumQualityPastSellInDayDropsToNoQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY-1).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	@Test
+	public void updateQualityOfBackstagePassWithMaximumQualityPastSellInDayDropsToNoQuality() {
+		givenABackstagePass().withQuality(MAXIMUM_QUALITY).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	
+	
 	
 	
 // helper methods
@@ -291,7 +437,7 @@ public class GildedRoseTestWithBuilderTest extends GildedRoseBoundaries {
 		return builder;
 	}
 	
-	private Builder givenBackstagePass() {
+	private Builder givenABackstagePass() {
 		builder = new BackstagePassBuilder();
 		return builder;
 	}
