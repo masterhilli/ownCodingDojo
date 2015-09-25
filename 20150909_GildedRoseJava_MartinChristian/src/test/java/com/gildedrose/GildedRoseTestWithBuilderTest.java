@@ -209,6 +209,71 @@ public class GildedRoseTestWithBuilderTest extends GildedRoseBoundaries {
 		thenTheQualityShouldBe(MAXIMUM_QUALITY);
 	}
 	
+//	| 'Sulfuras, Hand of Ragnaros'                | 1         | 50      | 50              |
+//  | 'Sulfuras, Hand of Ragnaros'                | 0         | 50      | 50              |
+//  | 'Sulfuras, Hand of Ragnaros'                | -1        | 50      | 50              |
+	@Test
+	public void updateQualityOfSulfurasItemWithMaximumQualityWithSellInDayStillHasMaximumQuality() {
+		givenASulfurasItem().withQuality(MAXIMUM_QUALITY).withSellIn(1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	@Test
+	public void updateQualityOfSulfurasItemWithMaximumQualityOnSellInDayStillHasMaximumQuality() {
+		givenASulfurasItem().withQuality(MAXIMUM_QUALITY).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+	@Test
+	public void updateQualityOfSulfurasItemWithMaximumQualityPastSellInDayStillHasMaximumQuality() {
+		givenASulfurasItem().withQuality(MAXIMUM_QUALITY).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+	}
+//    | 'Sulfuras, Hand of Ragnaros'                | 1         | 22      | 22              |
+//    | 'Sulfuras, Hand of Ragnaros'                | 0         | 22      | 22              |
+//    | 'Sulfuras, Hand of Ragnaros'                | -1        | 22      | 22              |
+	@Test
+	public void updateQualityOfSulfurasItemWithQualityWithSellInDayStillHasSameQuality() {
+		givenASulfurasItem().withQuality(EXAMPLE_QUALITY).withSellIn(1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY);
+	}
+	@Test
+	public void updateQualityOfSulfurasItemWithQualityOnSellInDayStillHasSameQuality() {
+		givenASulfurasItem().withQuality(EXAMPLE_QUALITY).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY);
+	}
+	@Test
+	public void updateQualityOfSulfurasItemWithQualityPastSellInDayStillHasSameQuality() {
+		givenASulfurasItem().withQuality(EXAMPLE_QUALITY).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(EXAMPLE_QUALITY);
+	}
+//    | 'Sulfuras, Hand of Ragnaros'                | 1         | 0       | 0               |
+//    | 'Sulfuras, Hand of Ragnaros'                | 0         | 0       | 0               |
+//    | 'Sulfuras, Hand of Ragnaros'                | -1        | 0       | 0               |
+	@Test
+	public void updateQualityOfSulfurasItemWithNoQualityWithSellInDayStillHasNoQuality() {
+		givenASulfurasItem().withQuality(0).withSellIn(1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	@Test
+	public void updateQualityOfSulfurasItemWithNoQualityOnSellInDayStillHasNoQuality() {
+		givenASulfurasItem().withQuality(0).withSellIn(0).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	@Test
+	public void updateQualityOfSulfurasItemWithNoQualityPastSellInDayStillHasNoQuality() {
+		givenASulfurasItem().withQuality(0).withSellIn(-1).inStock();
+		whenUpdateQuality();
+		thenTheQualityShouldBe(0);
+	}
+	
+	
 	
 // helper methods
 	private Builder givenAnOrdinaryItem() {
