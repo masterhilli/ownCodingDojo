@@ -7,7 +7,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class GildedRoseCucumberTestSteps extends GildedRoseWithDescribtiveUnitTest{
+public class GildedRoseCucumberTestSteps extends GildedRoseBasicTestUsage{
 	
 	@Before
 	public void setUp (){

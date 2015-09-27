@@ -1,24 +1,12 @@
 package com.gildedrose;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.gildedrose.GildedRose;
-import com.gildedrose.Item;
-
-public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
-	protected List<Item> actual;
-	private List<Item> originalItems;
-
-	private GildedRose app;
-
+public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBasicTestUsage {
 	@Before
 	public void setUp() {
 		actual = new ArrayList<>();
@@ -39,16 +27,16 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void itemQualityStaysAtNoQualityIfWithInSellInDays() {
-		givenAnItemOfQuality(MINIMUM_QUALITY);
+		givenAnItemOfQuality(GildedRoseBoundaries.MINIMUM_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MINIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MINIMUM_QUALITY);
 	} 
 
 	@Test
 	public void ordinaryItemPastSellInDayWithoutQualityStaysWithoutQuality() {
-		givenAnItemOfSellInAndQuality(PAST_SELLIN_DAYS, MINIMUM_QUALITY);
+		givenAnItemOfSellInAndQuality(GildedRoseBoundaries.PAST_SELLIN_DAYS, GildedRoseBoundaries.MINIMUM_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MINIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MINIMUM_QUALITY);
 	}
 
 	@Test
@@ -69,7 +57,7 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 	public void updateQualityReducesSellInValueForOrdinaryItemBy1AfterLastSellInDay() {
 		givenAnItemOfSellIn(0);
 		whenQualityIsUpdated();
-		thenSellInShouldBe(PAST_SELLIN_DAYS);
+		thenSellInShouldBe(GildedRoseBoundaries.PAST_SELLIN_DAYS);
 	}  
 
 	@Test
@@ -93,9 +81,9 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void ordinaryItemPastSellInDayWithLittleQualityDegradesToNoQuality() {
-		givenAnItemOfSellInAndQuality(PAST_SELLIN_DAYS, 1);
+		givenAnItemOfSellInAndQuality(GildedRoseBoundaries.PAST_SELLIN_DAYS, 1);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MINIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MINIMUM_QUALITY);
 	} 
 
 	/*
@@ -110,7 +98,7 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void updateQualityForAgedBriePastSellInDaysAndNoQualityIncreasesQualityTwiceAsFast() {
-		givenAnAgedBrieOfSellInDaysAndQuality(0, MINIMUM_QUALITY);
+		givenAnAgedBrieOfSellInDaysAndQuality(0, GildedRoseBoundaries.MINIMUM_QUALITY);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(2);
 	} 
@@ -124,7 +112,7 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void updateQualityForAgedBrieWithSellInDaysAndNoQualityIncreasesQualityBy1() {
-		givenAnAgedBrieOfSellInDaysAndQuality(5, MINIMUM_QUALITY);
+		givenAnAgedBrieOfSellInDaysAndQuality(5, GildedRoseBoundaries.MINIMUM_QUALITY);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(1);
 	}  
@@ -135,23 +123,23 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void updateQualityForAgedBrieWithQualityOf50StaysAt50() {
-		givenAnAgedBrieOfQuality(MAXIMUM_QUALITY);
+		givenAnAgedBrieOfQuality(GildedRoseBoundaries.MAXIMUM_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MAXIMUM_QUALITY);
 	}
 
 	@Test
 	public void updateQualityForAgedBrieWithQualityOf49Willbe50() {
-		givenAnAgedBrieOfQuality(MAXIMUM_QUALITY - 1);
+		givenAnAgedBrieOfQuality(GildedRoseBoundaries.MAXIMUM_QUALITY - 1);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MAXIMUM_QUALITY);
 	}
 
 	@Test
 	public void updateQualityForAgedBrieWithSellInDaysPastandQualityOf49Willbe50() {
-		givenAnAgedBrieOfSellInDaysAndQuality(PAST_SELLIN_DAYS, MAXIMUM_QUALITY - 1);
+		givenAnAgedBrieOfSellInDaysAndQuality(GildedRoseBoundaries.PAST_SELLIN_DAYS, GildedRoseBoundaries.MAXIMUM_QUALITY - 1);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MAXIMUM_QUALITY);
 	}
 
 	/*
@@ -161,9 +149,9 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void updateQualityforSulfurasWithSellInDaysReducesSellInDayBy1() {
-		givenASulfurasItemWithSellInDays(EXAMPLE_SELLINDAY);
+		givenASulfurasItemWithSellInDays(GildedRoseBoundaries.EXAMPLE_SELLINDAY);
 		whenQualityIsUpdated();
-		thenSellInShouldBe(EXAMPLE_SELLINDAY);
+		thenSellInShouldBe(GildedRoseBoundaries.EXAMPLE_SELLINDAY);
 	} 
 
 	@Test
@@ -182,23 +170,23 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void updateQualityforSulfurasWithMaxQualityKeepsMaxQuality() {
-		givenASulfurasItemWithQuality(MAXIMUM_QUALITY);
+		givenASulfurasItemWithQuality(GildedRoseBoundaries.MAXIMUM_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MAXIMUM_QUALITY);
 	}
 
 	@Test
 	public void updateQualityforSulfurasWithQualityOf10KeepsQuality() {
-		givenASulfurasItemWithQuality(EXAMPLE_QUALITY);
+		givenASulfurasItemWithQuality(GildedRoseBoundaries.EXAMPLE_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY);
 	}
 
 	@Test
 	public void updateQualityforSulfurasWithNoQualityKeepsNoQuality() {
-		givenASulfurasItemWithQuality(MINIMUM_QUALITY);
+		givenASulfurasItemWithQuality(GildedRoseBoundaries.MINIMUM_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MINIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MINIMUM_QUALITY);
 	}
 
 	/*
@@ -210,37 +198,37 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void updateQualityForABackstagePassWhereLongPeriodToSellInDaysIncreasesQualityBy1() {
-		givenABackstagePassWithSellInDays(EXAMPLE_SELLINDAY);
+		givenABackstagePassWithSellInDays(GildedRoseBoundaries.EXAMPLE_SELLINDAY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY + 1);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY + 1);
 	}
 
 	@Test
 	public void updateQualityForABackstagePassWhereMediumPeriodToSellInDaysIncreasesQualityBy2() {
 		givenABackstagePassWithSellInDays(10);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY + 2);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY + 2);
 	}
 
 	@Test
 	public void updateQualityForABackstagePassWhereMediumPeriodToSellInDaysAndAlmostMaxQualIncreasesQualityToMaxQuality() {
-		givenABackstagePassWithSellInDaysAndQuality(10, MAXIMUM_QUALITY - 1);
+		givenABackstagePassWithSellInDaysAndQuality(10, GildedRoseBoundaries.MAXIMUM_QUALITY - 1);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MAXIMUM_QUALITY);
 	}
 
 	@Test
 	public void updateQualityForABackstagePassWhereBreakToShortPeriodToSellInDaysIncreasesQualityBy2() {
 		givenABackstagePassWithSellInDays(5 + 1);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY + 2);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY + 2);
 	}
 
 	@Test
 	public void updateQualityForABackstagePassWhereShortPeriodToSellInDaysIncreasesQualityBy2() {
 		givenABackstagePassWithSellInDays(5);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY + 3);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY + 3);
 	}
 
 	@Test
@@ -252,14 +240,14 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 
 	@Test
 	public void updateQualityForABackstagePassWhereShortPeriodToSellInDaysAndAlmostMaxQualityIncreasesQualityToMaxQuality() {
-		givenABackstagePassWithSellInDaysAndQuality(5, MAXIMUM_QUALITY - 2);
+		givenABackstagePassWithSellInDaysAndQuality(5, GildedRoseBoundaries.MAXIMUM_QUALITY - 2);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MAXIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MAXIMUM_QUALITY);
 	}
 
 	@Test
 	public void updateQualityForABackstagePassWithSellInDayPastReturnsNoQuality() {
-		givenABackstagePassWithSellInDaysAndQuality(-1, MAXIMUM_QUALITY);
+		givenABackstagePassWithSellInDaysAndQuality(-1, GildedRoseBoundaries.MAXIMUM_QUALITY);
 		whenQualityIsUpdated();
 		thenTheQualityShouldBe(0);
 	}
@@ -272,26 +260,26 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 	@Ignore
 	@Test
 	public void updatetQualityForConjuredReducesQualityValueForOrdinaryItemBy1IfWithinSellIn() {
-		givenAConjuredItemOfQuality(EXAMPLE_QUALITY);
+		givenAConjuredItemOfQuality(GildedRoseBoundaries.EXAMPLE_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY-2);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY-2);
 	}
 
 
 	@Ignore
 	@Test
 	public void conjuredItemPastSellInDayWithoutQualityStaysWithoutQuality() {
-		givenAConjuredItemOfSellInAndQuality(PAST_SELLIN_DAYS, MINIMUM_QUALITY);
+		givenAConjuredItemOfSellInAndQuality(GildedRoseBoundaries.PAST_SELLIN_DAYS, GildedRoseBoundaries.MINIMUM_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MINIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MINIMUM_QUALITY);
 	}
 
 	@Ignore
 	@Test
 	public void updateQualityForConjuredReducesQualityValueOfOrdinaryItemBy1AfterLastSellInDay() {
-		givenAConjuredItemOfSellInAndQuality(1, EXAMPLE_QUALITY);
+		givenAConjuredItemOfSellInAndQuality(1, GildedRoseBoundaries.EXAMPLE_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY-2);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY-2);
 	}
 
 	/*
@@ -302,117 +290,16 @@ public class GildedRoseWithDescribtiveUnitTest extends GildedRoseBoundaries {
 	@Ignore
 	@Test
 	public void updateQualityForConjuredReducesQualityTwiceAsFastWhenPastSellIn() {
-		givenAConjuredItemOfSellInAndQuality(0, EXAMPLE_QUALITY);
+		givenAConjuredItemOfSellInAndQuality(0, GildedRoseBoundaries.EXAMPLE_QUALITY);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(EXAMPLE_QUALITY-4);
+		thenTheQualityShouldBe(GildedRoseBoundaries.EXAMPLE_QUALITY-4);
 	}
 	
 	@Ignore
 	@Test
 	public void conjuredItemPastSellInDayWithLittleQualityDegradesToNoQuality() {
-		givenAConjuredItemOfSellInAndQuality(PAST_SELLIN_DAYS, 3);
+		givenAConjuredItemOfSellInAndQuality(GildedRoseBoundaries.PAST_SELLIN_DAYS, 3);
 		whenQualityIsUpdated();
-		thenTheQualityShouldBe(MINIMUM_QUALITY);
+		thenTheQualityShouldBe(GildedRoseBoundaries.MINIMUM_QUALITY);
 	}
-
-
-	/*
-	 * Helper methods for a better description.
-	 */
-	protected void addItem(String name, int sellInDays, int quality) {
-		actual.add(new Item(name, sellInDays, quality));
-	}
-
-	/*
-	 * GIVEN
-	 */
-
-	protected void givenAnItemOfSellInAndQuality(int sellInDays, int quality) {
-		addItem(NAME_ORDINARY_ITEM, sellInDays, quality);
-
-	}
-
-	protected void givenAnOrdinaryItem() {
-		givenAnItemOfSellIn(EXAMPLE_SELLINDAY);
-	}
-
-	protected void givenAnItemOfSellIn(int sellIn) {
-		addItem(NAME_ORDINARY_ITEM, sellIn, MINIMUM_QUALITY);
-	}
-
-	protected void givenAnItemOfQuality(int quality) {
-		addItem(NAME_ORDINARY_ITEM, EXAMPLE_SELLINDAY, quality);
-	}
-
-	protected void givenAnAgedBrieOfQuality(int quality) {
-		givenAnAgedBrieOfSellInDaysAndQuality(EXAMPLE_SELLINDAY, quality);
-
-	}
-
-	protected void givenAnAgedBrieOfSellInDaysAndQuality(int sellInDays, int quality) {
-		addItem(NAME_AGED_BRIE, sellInDays, quality);
-	}
-
-	protected void givenASulfurasItemWithSellInDays(int sellInDays) {
-		addItem(NAME_SULFURAS, sellInDays, EXAMPLE_QUALITY);
-
-	}
-
-	protected void givenASulfurasItemWithQuality(int quality) {
-		addItem(NAME_SULFURAS, EXAMPLE_SELLINDAY, quality);
-
-	}
-
-	protected void givenABackstagePassWithSellInDays(int sellInDays) {
-		givenABackstagePassWithSellInDaysAndQuality(sellInDays, EXAMPLE_QUALITY);
-
-	}
-
-	protected void givenABackstagePassWithSellInDaysAndQuality(int sellInDays, int quality) {
-		addItem(NAME_BACKSTAGE_PASS, sellInDays, quality);
-
-	}
-
-	protected void givenAConjuredItemOfQuality(int quality) {
-		givenAConjuredItemOfSellInAndQuality(EXAMPLE_SELLINDAY, quality);
-	}
-	
-	protected void givenAConjuredItemOfSellInAndQuality(int sellInDays, int quality) {
-		addItem(NAME_CONJURED_ITEM, sellInDays, quality);
-		
-	}
-	
-	/**
-	 * WHEN
-	 */
-	protected void whenQualityIsUpdated() {
-		originalItems = actual.stream().map(item -> new Item(item.name, item.sellIn, item.quality))
-				.collect(Collectors.toList());
-		app = new GildedRose(actual.stream().toArray(Item[]::new));
-		app.updateQuality();
-	}
-
-	protected void thenTheQualityShouldBe(int expected) {
-		assertEquals(expected, app.items[0].quality);
-	}
-
-	protected void thenSellInShouldBe(int expected) {
-		assertEquals(expected, app.items[0].sellIn);
-	}
-
-	private void thenAllItemsShouldHaveBeenConsidered() {
-		int identical = 0;
-		Item[] originalArray = originalItems.stream().toArray(Item[]::new);
-		for (int i = 0; i < originalArray.length; i++) {
-			Item originalItem = originalArray[i];
-			Item stockItem = app.items[i];
-
-			if (originalItem.quality == stockItem.quality && originalItem.sellIn == stockItem.sellIn) {
-				identical++;
-			}
-
-		}
-		assertEquals(0, identical);
-	}
-
 }
