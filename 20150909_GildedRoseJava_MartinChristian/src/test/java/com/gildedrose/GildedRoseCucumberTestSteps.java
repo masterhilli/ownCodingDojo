@@ -14,14 +14,9 @@ public class GildedRoseCucumberTestSteps extends GildedRoseWithDescribtiveUnitTe
 		actual = new ArrayList<>();
 	}
 	
-	@Given ("an item with the name '(.+)', with days to sell in of (\\d+), with the quality of (\\d+)")
+	@Given ("an item with the name '(.+)', with days to sell in of (-?\\d+), with the quality of (\\d+)")
 	public void givenAnItemWithSellInAndQuality(final String name, final  int sellInDays, final int quality) {
 		addItem(name, sellInDays, quality);
-	}
-	
-	@Given ("an item with the name '(.+)', with days to sell in of -(\\d+), with the quality of (\\d+)")
-	public void givenAnItemWithSellInAndQualityMinusSellIn(final String name, final  int sellInDays, final int quality) {
-		addItem(name, -1*sellInDays, quality);
 	}
 
 	@When ("the quality is updated")
@@ -34,14 +29,9 @@ public class GildedRoseCucumberTestSteps extends GildedRoseWithDescribtiveUnitTe
 		super.thenTheQualityShouldBe(quality);
 	}
 	
-	@Then ("the day to sell the item in should be (\\d+)")
+	@Then ("the day to sell the item in should be (-?\\d+)")
 	public void thenSellInShouldBe(final int sellInDays) {
 		super.thenSellInShouldBe(sellInDays);
-	}
-	
-	@Then ("the day to sell the item in should be -(\\d+)")
-	public void thenSellInShouldBeMinus(final int sellInDays) {
-		super.thenSellInShouldBe(-1*sellInDays);
 	}
 	
 }
