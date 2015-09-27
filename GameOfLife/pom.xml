@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>gildedrose</groupId>
-  <artifactId>20150909_GildedRoseJava_MartinChristian</artifactId>
+  <groupId>201510_GameOfLife</groupId>
+  <artifactId>GameOfLife</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>GildedRoseExample</name>
-  <description>Example project with different ways to test your applications/source code</description>
+  <name>GameOfLife</name>
+  <description>Implementation of Conway's Game of Life</description>
   
   <build>
     <plugins>
