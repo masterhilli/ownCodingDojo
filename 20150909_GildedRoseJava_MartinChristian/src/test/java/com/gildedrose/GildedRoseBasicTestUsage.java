@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,7 @@ public abstract class GildedRoseBasicTestUsage{
 
 	public GildedRoseBasicTestUsage() {
 		super();
+		actual = new ArrayList<>();
 	}
 
 	protected void addItem(String name, int sellInDays, int quality) {
